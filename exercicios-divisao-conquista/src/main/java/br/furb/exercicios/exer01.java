@@ -8,6 +8,27 @@ public class exer01 {
     //este problema
 
     public static int buscaRecursiva(int[] vetor, int valor) {
-      return 1;
+        if (vetor.length == 0) { return -1; }
+
+        int meio = vetor.length / 2;
+
+        if (vetor[meio] == valor) { return meio; }
+
+        if (valor > vetor[meio]) {
+
+            int[] vetorAux = Arrays.copyOfRange(vetor, meio + 1, vetor.length);
+
+            int resultado = buscaRecursiva(vetorAux, valor);
+
+            if (resultado == -1) {
+                return -1;
+            }
+            return resultado + meio + 1;
+        }
+
+        else {
+            int[] vetorAux = Arrays.copyOfRange(vetor, 0, meio);
+            return buscaRecursiva(vetorAux, valor);
+        }
     }
 }
