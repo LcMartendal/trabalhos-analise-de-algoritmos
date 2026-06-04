@@ -1,13 +1,18 @@
 package org.example.Main;
 
-import org.example.exercicios.exer01.Item;
-import org.example.exercicios.exer02.Lugar;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.example.exercicios.exer01.Algoritmo.algoritmoPreencherComMaximoDeItensPRO;
+import org.example.exercicios.exer01.Item;
 import static org.example.exercicios.exer02.Algoritmo2.calcular;
+import org.example.exercicios.exer02.Lugar;
+import org.example.exercicios.exer03.Algoritmo;
+import org.example.exercicios.exer03.Estacao;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -50,5 +55,25 @@ public class Main {
         Neste caso específico o guloso até supera outras combinações (30 pontos),
         mas não garante ótimo global em todas as instâncias, pois ignora
         combinações futuras ao tomar a decisão local.*/
+
+
+        
+        // --- EXER 03 ---
+        System.out.println("\nQuestão 3:\n");
+        Set<String> estadosAlvo = new HashSet<>(Arrays.asList("mt", "rj", "es", "sp", "sc", "rs", "pr", "ms"));
+        //List<Estacao> estacoesAnunciaveis = new ArrayList<>();
+        List<Estacao> estacoesAnunciaveis = new ArrayList<>();
+        estacoesAnunciaveis.add(new Estacao("Kum", new HashSet<>(Arrays.asList("sp", "sc", "rs"))));
+        estacoesAnunciaveis.add(new Estacao("Kdois", new HashSet<>(Arrays.asList("rj", "sp", "mt"))));
+        estacoesAnunciaveis.add(new Estacao("Ktres", new HashSet<>(Arrays.asList("es", "sc", "pr"))));
+        estacoesAnunciaveis.add(new Estacao("Kquatro", new HashSet<>(Arrays.asList("sc", "rs"))));
+        estacoesAnunciaveis.add(new Estacao("Kcinco", new HashSet<>(Arrays.asList("pr", "ms"))));
+
+        List<Estacao> resultado = Algoritmo.algoritmo(estadosAlvo, estacoesAnunciaveis);
+        
+        System.out.println("Estações selecionadas pelo algoritmo ganancioso:");
+        for(Estacao e : resultado) {
+            System.out.println(e.nome + " (Que cobre os estados: " + e.cobertura + ")");
+        }
     }
 }
